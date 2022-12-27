@@ -2,26 +2,35 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/tags/hugo/</loc>
-    <lastmod>2021-11-04T00:00:00+00:00</lastmod>
+    <loc>/tags/git/</loc>
+    <lastmod>2020-10-25T22:00:00+00:00</lastmod>
   </url><url>
-    <loc>/2021/11/04/hugo-markdown/</loc>
-    <lastmod>2021-11-04T00:00:00+00:00</lastmod>
+    <loc>/tags/go/</loc>
+    <lastmod>2020-10-25T22:00:00+00:00</lastmod>
   </url><url>
     <loc>/</loc>
-    <lastmod>2021-11-04T00:00:00+00:00</lastmod>
+    <lastmod>2020-10-25T22:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/2020/10/25/tutorial-go-git/</loc>
+    <lastmod>2020-10-25T22:00:00+00:00</lastmod>
   </url><url>
     <loc>/posts/</loc>
-    <lastmod>2021-11-04T00:00:00+00:00</lastmod>
+    <lastmod>2020-10-25T22:00:00+00:00</lastmod>
   </url><url>
     <loc>/tags/</loc>
-    <lastmod>2021-11-04T00:00:00+00:00</lastmod>
+    <lastmod>2020-10-25T22:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tags/fiction/</loc>
-    <lastmod>1948-12-12T10:18:00+00:00</lastmod>
+    <loc>/tags/tutorial/</loc>
+    <lastmod>2020-10-25T22:00:00+00:00</lastmod>
   </url><url>
-    <loc>/1948/12/12/the-purpose-of-education/</loc>
-    <lastmod>1948-12-12T10:18:00+00:00</lastmod>
+    <loc>/tags/devops/</loc>
+    <lastmod>2020-09-16T22:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/terraform/</loc>
+    <lastmod>2020-09-16T22:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/2020/09/16/terraform-blog-series-3-tips/</loc>
+    <lastmod>2020-09-16T22:00:00+00:00</lastmod>
   </url><url>
     <loc>/categories/</loc>
   </url>

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Hugo Serial Programmer</title>
-    <link>/</link>
-    <description>Recent content on Hugo Serial Programmer</description>
+    <title>git on Hugo Serial Programmer</title>
+    <link>/tags/git/</link>
+    <description>Recent content in git on Hugo Serial Programmer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>me@example.com (sharadcodes)</managingEditor>
     <webMaster>me@example.com (sharadcodes)</webMaster>
     <copyright>2021 Janne Kemppainen All rights reserved</copyright>
-    <lastBuildDate>Sun, 25 Oct 2020 22:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 25 Oct 2020 22:00:00 +0000</lastBuildDate><atom:link href="/tags/git/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>In-memory Git clone, commit and push using GO</title>
       <link>/2020/10/25/tutorial-go-git/</link>
@@ -17,17 +17,6 @@
       <author>me@example.com (sharadcodes)</author>
       <guid>/2020/10/25/tutorial-go-git/</guid>
       <description>Tutorial introduction and requirements Today&amp;rsquo;s article is a tutorial on how set up and use the go-git library to clone and update a repository with an in-memory filesystem.This procedure is quite useful if you want to push against or clone a repository without touching the OS filesystem and deal with permissions or temporary files.Albeit, there&amp;rsquo;s documentation about git-go, I find it not really clear and sometimes misleading due to the different versions and names of the library.</description>
-    </item>
-    
-    <item>
-      <title>Terraform Blog Series: These 3 tips will save you from terrible mistakes</title>
-      <link>/2020/09/16/terraform-blog-series-3-tips/</link>
-      <pubDate>Wed, 16 Sep 2020 22:00:00 +0000</pubDate>
-      <author>me@example.com (sharadcodes)</author>
-      <guid>/2020/09/16/terraform-blog-series-3-tips/</guid>
-      <description>1. A big single state file is not going to help you. When a new user starts with Terraform, it could seem easier to manage all the infrastructure code under one big repository and one big state file (To who doesn&amp;rsquo;t know what a state file is, check out this page -&amp;gt; https://www.terraform.io/docs/state/index.html)
-However, this design will soon show its downsides and limits.
-Why is a mono state file, not a good idea in terms of performance?</description>
     </item>
     
   </channel>

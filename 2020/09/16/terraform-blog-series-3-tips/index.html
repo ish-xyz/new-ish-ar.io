@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terraform Blog Series: These 3 tips will save you from terrible mistakes | Hugo Serial Programmer</title>
+  <link rel="stylesheet" href="/assets/css/post.css" />
+  <script defer src="/assets/js/lbox.js"></script>
+  
+  <link rel="stylesheet" href="/assets/css/common.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+  <a class="site-title" href="/">Hugo Serial Programmer</a>
+</header>
+
+      <section class="article">
+        <div class="article-header">
+          <h2 class="article-title">Terraform Blog Series: These 3 tips will save you from terrible mistakes</h2>
+          <small class="date">Wed Sep 16, 2020</small>
+          <div class="tags">
+            
+            <a href="/tags/terraform" class="tag">terraform</a>
+            
+            <a href="/tags/devops" class="tag">devops</a>
+            
+          </div>
+        </div>
+        <div class="content"><p><img src="./terraform-icon.png" alt="terraform-icon"></p>
+<h2 id="1-a-big-single-state-file-is-not-going-to-help-you">1. A big single state file is not going to help you.</h2>
+<p>When a new user starts with Terraform, it could seem easier to manage all the infrastructure code under one big repository and one big state file (To who doesn&rsquo;t know what a state file is, check out this page -&gt; <a href="https://www.terraform.io/docs/state/index.html">https://www.terraform.io/docs/state/index.html</a>)</p>
+<p>However, this design will soon show its downsides and limits.</p>
+<p><strong>Why is a mono state file, not a good idea in terms of performance?</strong></p>
+<p>One of the reason is that during the &lsquo;terraform plan&rsquo; command there&rsquo;s an action called &ldquo;refresh&rdquo;. This step means that Terraform is about to &ldquo;reconcile the state Terraform knows about (via its state file) with the real-world infrastructure.&quot;<!-- raw HTML omitted -->
+If there&rsquo;s a big state file with the whole infrastructure mapped and a person wants to change just a single GKE cluster, remove a single EC2 instance or create a new bucket.<!-- raw HTML omitted -->
+Guess what? <strong>It will require the refresh on the whole infrastructure</strong> (and trust me, it will take a while!)</p>
+<p><strong>But what about the infrastructure reliability?</strong></p>
+<p>What happens if accidentally someone runs &lsquo;terraform destroy&rsquo; against that mono state file?<!-- raw HTML omitted -->
+Yes. It&rsquo;s all gone. You would have to recreate the infrastructure.</p>
+<p>What happens if someone uses a new terraform version? (e.g.: from terraform 0.11 to terraform 0.12)<!-- raw HTML omitted -->
+Everyone would have to upgrade the CLI version, and if you&rsquo;re unlucky, you might also need to update the actual terraform code.<!-- raw HTML omitted -->
+There are other reasons, but I&rsquo;m sure I&rsquo;ve made this point clear enough: don&rsquo;t use a single state file! -.-'</p>
+<h2 id="2-monorepo-is-evil">2. Monorepo is evil.</h2>
+<p>Someone  might say: let&rsquo;s put all together, modules, code, everything in a single repository but in different directories with different state files: brilliant -.-'</p>
+<p>Trust me when I say that I&rsquo;ve seen the worst things with Terraform: repositories with symlinks to share/copy variables in different directories, I&rsquo;ve seen gigantic mono repositories, terraform files generated from bash scripts and an SQL database, trust me it&rsquo;s not fancy out there.</p>
+<p>Why is a huge repository NOT a good idea in terms of code reliability?<!-- raw HTML omitted -->
+Plain and simple: it doesn&rsquo;t scale.<!-- raw HTML omitted -->
+Now imagine you&rsquo;re a small team of 5 engineers, pushing all the infrastructure code together might seem a good idea.<!-- raw HTML omitted -->
+You all have permission to create/remove/edit the terraform code, and this way, you would not have to deal with multiple pipelines, etc.</p>
+<p>However after a year, your small team of 5 becomes 100. Other engineers now want to use Terraform to manage their infrastructures (network engineers, DBAs, Data Engineers, Data Scientists, etc.).</p>
+<p>It will become tricky (not impossible) to manage permissions, coordinate terraform changes, and create a whole pipeline/automation that can satisfy everyone&rsquo;s need.</p>
+<p>And what if you have used modules inside that single repository?<!-- raw HTML omitted -->
+How are you going to manage modules versions?<!-- raw HTML omitted -->
+A poor repositories structure design generates all these obstacles.</p>
+<p>What if you are already there?<!-- raw HTML omitted -->
+My piece of advice is start by moving modules to different repositories.<!-- raw HTML omitted -->
+You can also start to automate testing and tagging on modules.<!-- raw HTML omitted --></p>
+<p>After this first step is done, split your infrastructure into layers, and start to divide the layers inside different repositories managed by the owners of that layer of infrastructure.<!-- raw HTML omitted -->
+It will be painful!<!-- raw HTML omitted -->
+Remember, no pain, no gain!</p>
+<h2 id="3-dont-run-terraform-manually-use-pipelines">3. Don&rsquo;t run Terraform manually: use pipelines.</h2>
+<p>Here too, I&rsquo;ve seen the worst things. I&rsquo;ve once worked for a company that used to have a Slack channel where they &ldquo;locked&rdquo; Terraform by basically sending messages like &ldquo;I&rsquo;m using Terraform&rdquo; or &ldquo;terraform locked&rdquo;: I mean&hellip; seriously? &ldquo;Terraform locked&rdquo;?  -.-'</p>
+<p>Having the right orchestration and automation will help your team to don&rsquo;t override each other changes.<!-- raw HTML omitted -->
+If you plan to work with pipelines, my advice is to have <em>no</em> concurrent builds and run the automation on tiny parts of the infrastructures.<!-- raw HTML omitted -->
+By doing this, there won&rsquo;t be long pipelines but quick flows with an effective feedback cycle.</p>
+<p><em>Always tag your infrastructure code</em>, and treat it as a real software/application.</p>
+<p><em>Run tests.</em> Testing Terraform code might look complicated but there some useful tools out there such as &ldquo;terratest&rdquo;.<!-- raw HTML omitted -->
+If you&rsquo;re comfortable with Go, you can follow Hashicorp&rsquo;s tutorials about unit testing with Terraform.</p>
+<p><em>You should have a tool to handle the CI and another to run the deploy.</em><!-- raw HTML omitted -->
+In my opinion, the desired situation is that the CI tool would push an artifact with the tested Terraform code in it, and the deploy would pick the artifact and deploy it.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>The perfect way to run Terraform doesn&rsquo;t exist.<!-- raw HTML omitted -->
+In most cases, it depends on the use case, BUT there are some errors that I&rsquo;d define common mistakes that everyone should avoid.<!-- raw HTML omitted -->
+Remember: well begun is half done :)</p>
+</div>
+      </section>
+      <footer>
+  <p>&copy; 1947 - 2022 </p>
+</footer>
+    </main>
+  </body>
+</html>

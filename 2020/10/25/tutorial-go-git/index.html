@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>In-memory Git clone, commit and push using GO | Hugo Serial Programmer</title>
+  <link rel="stylesheet" href="/assets/css/post.css" />
+  <script defer src="/assets/js/lbox.js"></script>
+  
+  <link rel="stylesheet" href="/assets/css/common.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+  <a class="site-title" href="/">Hugo Serial Programmer</a>
+</header>
+
+      <section class="article">
+        <div class="article-header">
+          <h2 class="article-title">In-memory Git clone, commit and push using GO</h2>
+          <small class="date">Sun Oct 25, 2020</small>
+          <div class="tags">
+            
+            <a href="/tags/go" class="tag">go</a>
+            
+            <a href="/tags/git" class="tag">git</a>
+            
+            <a href="/tags/tutorial" class="tag">tutorial</a>
+            
+          </div>
+        </div>
+        <div class="content"><h2 id="tutorial-introduction-and-requirements">Tutorial introduction and requirements</h2>
+<p>Today&rsquo;s article is a tutorial on how set up and use the go-git library to clone and update a repository with an in-memory filesystem.<!-- raw HTML omitted -->
+This procedure is quite useful if you want to push against or clone a repository without touching the OS filesystem and deal with permissions or temporary files.<!-- raw HTML omitted -->
+Albeit, there&rsquo;s documentation about git-go, I find it not really clear and sometimes misleading due to the different versions and names of the library.<!-- raw HTML omitted -->
+For this reason, I&rsquo;ve decided to share this tutorial, and hopefully will be helpful to someone.<!-- raw HTML omitted -->
+For the purpose of this tutorial, we will do everything inside a main.go file, however you might want something more sofisticated for your use case :)</p>
+<p><strong>Requirements</strong>:</p>
+<ul>
+<li>An https Git repository (Github, Bitbucket doesn&rsquo;t really matter as long as it&rsquo;s accessible via https.)</li>
+<li>Go installed and configured.</li>
+<li>Basic Knowledge of Go.</li>
+</ul>
+<h2 id="setting-up-the-in-memory-filesystem">Setting up the In-Memory Filesystem</h2>
+<p>To set up the in-memory filesystem, we will use two packages storage and memfs.
+The storer will contain the objects, references and other metadata (normally what the directory <code>.git</code> would do).<!-- raw HTML omitted -->
+The memfs filesystem will be our filesystem to read, create, remove any kind of file in our repository.<!-- raw HTML omitted -->
+First step, we need to create the two objects (the storer and the filesystem).</p>
+<pre><code>package main
+
+import (
+        &quot;fmt&quot;
+
+        billy &quot;github.com/go-git/go-billy/v5&quot;
+        memfs &quot;github.com/go-git/go-billy/v5/memfs&quot;
+        git &quot;github.com/go-git/go-git/v5&quot;
+        http &quot;github.com/go-git/go-git/v5/plumbing/transport/http&quot;
+        memory &quot;github.com/go-git/go-git/v5/storage/memory&quot;
+)
+
+var storer *memory.Storage
+var fs billy.Filesystem
+
+func main() {
+        storer = memory.NewStorage()
+        fs = memfs.New()
+
+...
+</code></pre><h2 id="setting-up-git-objects-and-clone-the-repo">Setting up Git objects and Clone the repo</h2>
+<p>Second step, in order to have our repository in the in-memory filesystem, we need to <strong>clone</strong> it and create the <strong>worktree</strong> object.<!-- raw HTML omitted -->
+The function <code>Clone()</code> will also return the Repository interface that we will then use to <code>Push()</code> to the remote.<!-- raw HTML omitted -->
+The method <code>Worktree()</code> will return the Worktree object that we will need to <code>Add()</code> &amp; <code>Commit()</code> our changes.<!-- raw HTML omitted -->
+Finally, if our repository is private, we would need to set up the basic authentication to clone it (We need the basic authentication to push anyway so better to set up it here!).</p>
+<pre><code>...
+
+        // Authentication
+        auth := &amp;http.BasicAuth{
+                Username: &quot;your-git-user&quot;,
+                Password: &quot;your-git-pass&quot;,
+        }
+
+        repository := &quot;https://github.com/your-org/your-repo&quot;
+        r, err := git.Clone(storer, fs, &amp;git.CloneOptions{
+                URL:  repository,
+                Auth: auth,
+        })
+        if err != nil {
+                fmt.Printf(&quot;%v&quot;, err)
+                return
+        }
+        fmt.Println(&quot;Repository cloned&quot;)
+
+        w, err := r.Worktree()
+        if err != nil {
+                fmt.Printf(&quot;%v&quot;, err)
+                return
+        }
+</code></pre><h2 id="create-and-commit-your-files">Create and commit your files</h2>
+<p>Now, will we use the <code>fs</code> object to create an actual file, add &amp; commit it to the Worktree().</p>
+<p><strong>NOTE</strong>:</p>
+<ul>
+<li>By default, the repository is always cloned into <code>&quot;/&quot;</code>.</li>
+<li>For some reason (unknown to me), if the filename starts with &ldquo;/&rdquo; it will create a folder and not a file.<!-- raw HTML omitted -->E.g.: /hello/world.txt (world.txt would be a directory) hello/world.txt (world.txt would be a file inside the folder hello)</li>
+</ul>
+<pre><code>...
+
+        // Create new file
+        filePath := &quot;my-new-ififif.txt&quot;
+        newFile, err := fs.Create(filePath)
+        if err != nil {
+                return
+        }
+        newFile.Write([]byte(&quot;My new file&quot;))
+        newFile.Close()
+
+        // Run git status before adding the file to the worktree
+        fmt.Println(w.Status())
+
+        // git add $filePath
+        w.Add(filePath)
+
+        // Run git status after the file has been added adding to the worktree
+        fmt.Println(w.Status())
+
+        // git commit -m $message
+        w.Commit(&quot;Added my new file&quot;, &amp;git.CommitOptions{})
+</code></pre><h2 id="push-and-check-errors">Push and check errors</h2>
+<p>The Push() will be performed using the method of the Repository interface as shown below.</p>
+<pre><code>...
+
+        //Push the code to the remote
+        err = r.Push(&amp;git.PushOptions{
+                RemoteName: &quot;origin&quot;,
+                Auth:       auth,
+        })
+        if err != nil {
+                return
+        }
+        fmt.Println(&quot;Remote updated.&quot;, filePath)
+        return
+}
+</code></pre><p>Our final main.go would look like this: <a href="https://github.com/ish-xyz/ish-ar.io-tutorials/blob/master/tutorial-go-git/main.go">https://github.com/ish-xyz/ish-ar.io-tutorials/blob/master/tutorial-go-git/main.go</a></p>
+<h2 id="install-and-run-our-module">Install and run our module</h2>
+<p>Let&rsquo;s try our new go module. Run the following commands:</p>
+<pre><code>go mod init
+go build
+go run main.go
+
+    Repository cloned
+    ?? my-new-file.txt
+    &lt;nil&gt;
+    A  my-new-file.txt
+    &lt;nil&gt;
+    Remote updated. my-new-file.txt
+</code></pre><p>I know this is quite a specific topic, but I hope this tutorial will help someone!</p>
+</div>
+      </section>
+      <footer>
+  <p>&copy; 1947 - 2022 </p>
+</footer>
+    </main>
+  </body>
+</html>
