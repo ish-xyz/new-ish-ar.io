@@ -5,7 +5,7 @@ description: "A big single state file is not going to help you. When a new user 
 tags: ["terraform", "devops"]
 ---
 
-![terraform-icon](./terraform-icon.png)
+![terraform-icon](./images/terraform-icon.png)
 
 ## 1. A big single state file is not going to help you.
 

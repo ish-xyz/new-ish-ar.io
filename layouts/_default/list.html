@@ -5,6 +5,7 @@
     <main>
       {{ partial "header.html" . }}
       {{ partial "bio.html" . }}
+      {{ partial "form.html" . }}
       <section class="articles">
         {{ range (.Paginate ( where site.RegularPages "Section" "posts" ).ByDate.Reverse).Pages }}
         <article class="article">
