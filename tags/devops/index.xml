@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>devops on Hugo Serial Programmer</title>
+    <title>devops on Isham Araia&#39;s Blog</title>
     <link>/tags/devops/</link>
-    <description>Recent content in devops on Hugo Serial Programmer</description>
+    <description>Recent content in devops on Isham Araia&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>me@example.com (sharadcodes)</managingEditor>
-    <webMaster>me@example.com (sharadcodes)</webMaster>
-    <copyright>2021 Janne Kemppainen All rights reserved</copyright>
+    <managingEditor>me@ish-ar.io (sharadcodes)</managingEditor>
+    <webMaster>me@ish-ar.io (sharadcodes)</webMaster>
+    <copyright>2023 Isham Araia All rights reserved</copyright>
     <lastBuildDate>Wed, 16 Sep 2020 22:00:00 +0000</lastBuildDate><atom:link href="/tags/devops/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Terraform Blog Series: These 3 tips will save you from terrible mistakes</title>
-      <link>/2020/09/16/terraform-blog-series-3-tips/</link>
+      <link>/terraform-blog-series-3-tips/</link>
       <pubDate>Wed, 16 Sep 2020 22:00:00 +0000</pubDate>
-      <author>me@example.com (sharadcodes)</author>
-      <guid>/2020/09/16/terraform-blog-series-3-tips/</guid>
+      <author>me@ish-ar.io (sharadcodes)</author>
+      <guid>/terraform-blog-series-3-tips/</guid>
       <description>1. A big single state file is not going to help you. When a new user starts with Terraform, it could seem easier to manage all the infrastructure code under one big repository and one big state file (To who doesn&amp;rsquo;t know what a state file is, check out this page -&amp;gt; https://www.terraform.io/docs/state/index.html)
 However, this design will soon show its downsides and limits.
 Why is a mono state file, not a good idea in terms of performance?</description>

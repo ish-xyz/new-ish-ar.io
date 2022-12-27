@@ -1,6 +1,6 @@
 {
   "version": "https://jsonfeed.org/version/1",
-  "title": "Hugo Serial Programmer",
+  "title": "Isham Araia's Blog",
   "home_page_url": "/",
   "feed_url": "/",
 
@@ -9,20 +9,20 @@
   
   
     {
-      "id": "/2020/10/25/tutorial-go-git/",
+      "id": "/tutorial-go-git/",
       "title": "In-memory Git clone, commit and push using GO",
       "content_text": "Tutorial introduction and requirements Today\u0026rsquo;s article is a tutorial on how set up and use the go-git library to clone and update a repository with an in-memory filesystem.This procedure is quite useful if you want to push against or clone a repository without touching the OS filesystem and deal with permissions or temporary files.Albeit, there\u0026rsquo;s documentation about git-go, I find it not really clear and sometimes misleading due to the different versions and names of the library.",
-      "url": "/2020/10/25/tutorial-go-git/",
+      "url": "/tutorial-go-git/",
       "date_published": "2020-10-25 22:00:00 +0000 UTC",
       "tags": ["go,git,tutorial"]
     }
   
   , 
     {
-      "id": "/2020/09/16/terraform-blog-series-3-tips/",
+      "id": "/terraform-blog-series-3-tips/",
       "title": "Terraform Blog Series: These 3 tips will save you from terrible mistakes",
       "content_text": "1. A big single state file is not going to help you. When a new user starts with Terraform, it could seem easier to manage all the infrastructure code under one big repository and one big state file (To who doesn\u0026rsquo;t know what a state file is, check out this page -\u0026gt; https://www.terraform.io/docs/state/index.html)\nHowever, this design will soon show its downsides and limits.\nWhy is a mono state file, not a good idea in terms of performance?",
-      "url": "/2020/09/16/terraform-blog-series-3-tips/",
+      "url": "/terraform-blog-series-3-tips/",
       "date_published": "2020-09-16 22:00:00 +0000 UTC",
       "tags": ["terraform,devops"]
     }
