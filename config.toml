@@ -1,6 +1,7 @@
 baseURL = "/"
 languageCode = "en-us"
 title = "Isham Araia's Blog"
+slogan = "Posts about cloud native & distributed systems, Linux internals and more"
 rssLimit = 20
 copyright = "2023 Isham Araia All rights reserved"
 minify = false
