@@ -40,7 +40,7 @@ header .site-title {
 }
 main {
   margin: 0 auto;
-  max-width: 650px;
+  max-width: 920px;
   padding: 3rem 0;
 }
 
@@ -96,9 +96,8 @@ main {
 .articles .article .article-title,
 .articles .article .article-title a {
   color: var(--white-2);
-  font-weight: 100;
-  font-style: italic;
-  font-size: 1.4rem;
+  font-weight: 800;
+  font-size: 1.7rem;
   line-height: 130%;
 }
 .articles .article:hover {
