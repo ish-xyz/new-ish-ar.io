@@ -1,23 +1,15 @@
-name: Sharad Raj
-dp: https://avatars2.githubusercontent.com/u/36638057?s=460&u=0cbe4fd6b5a3655d91b3eb86db834d0829a0c086&v=4
+name: Isham Araia
+dp: /images/profile-image.png
 description: "
-  <p>
-    Developed by Sharad Raj who lives in India building useful things for the world.
-  </p>
-  <br/>
-  <p>
-    You should follow him on <a href='https://github.com/sharadcodes' target='_blank'>Github</a>
-  </P>
+Ciao! This is Ish(~) and here's my blog. <br>
+A bunch of articles, posts and considerations mostly from projects I am currently following at work.
+I would love to read your opinions or answer the questions you might have, so please feel free to get in touch!
 "
-email: dev_sharad@outlook.com
+email: me@ish-ar.io
 contact:
   - title: linkedin
-    url: https://www.linkedin.com/in/srsmaurya
+    url: https://www.linkedin.com/in/isham-araia-086a986b/
   - title: github
-    url: https://github.com/sharadcodes
-  - title: twitter
-    url: https://twitter.com/sharadcodes
-  - title: dev
-    url: https://dev.to/sharadcodes
+    url: https://github.com/ish-xyz
   - title: email
-    url: mailto:me@example.com
+    url: mailto:me@ish-ar.io

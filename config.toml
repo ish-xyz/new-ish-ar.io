@@ -1,16 +1,16 @@
 baseURL = "/"
 languageCode = "en-us"
-title = "Hugo Serial Programmer"
+title = "Isham Araia's Blog"
 rssLimit = 20
-copyright = "2021 Janne Kemppainen All rights reserved"
+copyright = "2023 Isham Araia All rights reserved"
 minify = false
 
 [Author]
   name = "sharadcodes"
-  email = "me@example.com"
+  email = "me@ish-ar.io"
 
 [permalinks]
-  posts = "/:year/:month/:day/:filename"
+  posts = "/:filename"
   pages = "/:slug"
 
 [taxonomies]

@@ -25,10 +25,9 @@
 html,
 body {
   color: var(--white-2);
-  background-color: var(--gray-6);
   font-family: "JetBrains Mono", monospace;
   line-height: 2rem;
-  background-color: var(--gray-5);
+  background-color: #1d252f;
 }
 header {
   padding: 2rem 0 4rem 0;
